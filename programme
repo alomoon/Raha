@@ -1,0 +1,47 @@
+bot=commands.bot(command_prefix="!")
+
+#création d'un dictionnaire pour stocker les données économiques
+economie={}
+
+#commande pour voir son solde
+@bot.command("!sold")
+async def balance(100):
+  utilisateur=str(ctx.author.id)
+  if utilisateur in economie:
+    solde=économie[utilisateur]
+    await ctx.send(f"Votre solde est de {solde}pièces.")
+  else:
+    await ctx .send ("Vous n'avez pas encore de compte.")
+
+#Commande pour ajouter de l'argent a son compte
+@bot.command("!ad")
+async def ajouter_argent(ctx,montant:int):
+  utilisateur=str(ctx.author.id)
+  if utilisateur in economie:
+    economie[utilisateur]+=montant
+  else:
+    economie[utilisateur]=montant
+  awaitctx.send(f"{montant} pièces ajoutées à votre compte.")
+
+#Commande pour acheter un objet sur le marché
+@bot.command("!buy {objet}")
+async def acheter(ctx,objet:str):
+    utilisateur=str(ctx.author.id)
+    if objet=="potion":
+      prix_potion=10
+      if utilisateur in economie:
+        if economie[utilisateur]>=prix_potion
+          economie[utilisateur]-=prix_potion
+          await ctx.send("vous avez acheté une potion.")
+        else:
+          await ctx.send("vous n'avez pas assez d'argent pour acheté une potion.")
+        else:
+          await ctx.send("Vous devez d'abord créez un compte.")
+        else
+          await ctx. send("l'objet demandé n'est pas ou plus disponible.")
+#Commande pour voir le marché 
+@bot.command("!market")
+async def marché(ctx):
+  await ctx.send("Objets disponible:\n-Potion(10 pièces)")
+
+  bot.run("token")
